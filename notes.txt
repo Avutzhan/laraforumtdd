@@ -6,3 +6,13 @@
 
 A. Thread is created by User
 B. A reply belongs to a thread, and belongs to a user
+
+
+
+
+
+#Errors and Bugs
+
+1 Bug with an_authenticated_user_may_participate_in_forum_threads test in common code is without error but test do not pass
+because phpstorm does not use phpunit.xml properly and you must rewrite .env APP_ENV from local to testing and clear cache configs
+or set up phpstorm to use properly phpunit.xml

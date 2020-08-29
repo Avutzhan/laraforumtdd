@@ -6,8 +6,22 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="/profiles/{{ $thread->creator->name }}">{{ $thread->creator->name }}</a> posted:
-                        {{ $thread->title }}</div>
+                        <div class="level">
+                            <span>
+                                <a href="/profiles/{{ $thread->creator->name }}">{{ $thread->creator->name }}</a> posted:
+                            {{ $thread->title }}
+                            </span>
+
+                            @if (Auth::check())
+                                <form method="POST" action="{{ $thread->path() }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+                                    <button type="submit" class="btn btn-link">Delete Thread</button>
+                                </form>
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="panel-body">
                         {{ $thread->body }}

@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -7,11 +6,17 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.$ = window.jQuery = require('jquery');
+window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
-} catch (e) {}
+require('bootstrap-sass');
+
+/**
+ * Vue is a modern JavaScript library for building interactive web interfaces
+ * using reactive data binding and reusable components. Vue's API is clean
+ * and simple, leaving you to focus on building your next great project.
+ */
+
+window.Vue = require('vue');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -25,6 +30,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.events = new Vue();
 
-window.flash = function () {
+window.flash = function (message) {
     window.events.$emit('flash', message);
 };

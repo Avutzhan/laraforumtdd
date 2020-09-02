@@ -1038,8 +1038,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 __webpack_require__(31);
 
-window.Vue = __webpack_require__(45);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -1954,7 +1952,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 window._ = __webpack_require__(36);
 
 /**
@@ -1963,11 +1960,17 @@ window._ = __webpack_require__(36);
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-  window.$ = window.jQuery = __webpack_require__(35);
+window.$ = window.jQuery = __webpack_require__(35);
 
-  __webpack_require__(32);
-} catch (e) {}
+__webpack_require__(32);
+
+/**
+ * Vue is a modern JavaScript library for building interactive web interfaces
+ * using reactive data binding and reusable components. Vue's API is clean
+ * and simple, leaving you to focus on building your next great project.
+ */
+
+window.Vue = __webpack_require__(45);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -1981,7 +1984,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.events = new Vue();
 
-window.flash = function () {
+window.flash = function (message) {
   window.events.$emit('flash', message);
 };
 

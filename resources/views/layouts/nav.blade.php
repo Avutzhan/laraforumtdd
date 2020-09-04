@@ -35,6 +35,9 @@
                         <li>
                             <a href="/threads?popularity=1">Popular Thread</a>
                         </li>
+                        <li>
+                            <a href="/threads?unanswered=1">Unanswered Thread</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

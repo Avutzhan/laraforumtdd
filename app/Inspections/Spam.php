@@ -17,8 +17,6 @@ class Spam
             app($inspection)->detect($body);
         }
 
-        $this->detectKeyHeldDown($body);
-
         return false;
     }
 }

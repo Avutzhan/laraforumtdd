@@ -12,6 +12,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="level">
+                                <img src="/storage/{{ $thread->creator->avatar() }}" width="25" height="25" alt="{{ $thread->creator->name }}" class="mr-1">
+
                                 <span>
                                     <a href="/profiles/{{ $thread->creator->name }}">{{ $thread->creator->name }}</a> posted:
                                 {{ $thread->title }}

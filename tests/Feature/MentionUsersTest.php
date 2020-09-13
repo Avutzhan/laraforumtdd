@@ -42,4 +42,6 @@ class MentionUsersTest extends TestCase
 
         $this->assertCount(2, $results->json());
     }
+
+
 }

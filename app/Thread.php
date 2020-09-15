@@ -2,12 +2,7 @@
 
 namespace App;
 
-use App\Events\ThreadHasNewReply;
-use App\Events\ThreadReceivedNewReply;
-use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Redis;
-use function foo\func;
 
 class Thread extends Model
 {
@@ -53,8 +48,6 @@ class Thread extends Model
     public function addReply($reply)
     {
         $reply = $this->replies()->create($reply);
-
-//        event(new ThreadReceivedNewReply($reply));
 
         $this->notifySubscribers($reply);
 
@@ -109,4 +102,8 @@ class Thread extends Model
         return $this->updated_at > cache($key);
     }
 
+    public function visits()
+    {
+        return new Visits($this);
+    }
 }

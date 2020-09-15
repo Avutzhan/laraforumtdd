@@ -4,6 +4,7 @@
 namespace App;
 
 
+use Illuminate\Support\Facades\Redis;
 use phpDocumentor\Reflection\Types\Static_;
 
 trait RecordsActivity
@@ -48,4 +49,5 @@ trait RecordsActivity
 
         return "{$event}_{$type}";
     }
+
 }

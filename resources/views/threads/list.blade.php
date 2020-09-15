@@ -31,7 +31,7 @@
         </div>
 
         <div class="panel-footer">
-            {{ $thread->visits() }} visits
+            {{ $thread->visits }} visits
         </div>
     </div>
 @empty

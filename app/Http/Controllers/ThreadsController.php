@@ -63,7 +63,7 @@ class ThreadsController extends Controller
             'channel_id' => request('channel_id'),
             'title' => request('title'),
             'body' => request('body'),
-            'slug' => str_slug(request('title'))
+            'slug' => request('title')
         ]);
 
         return redirect($thread->path())
@@ -78,15 +78,15 @@ class ThreadsController extends Controller
      */
     public function show($channel, Thread $thread, Trending $trending)
     {
-       if (auth()->check()) {
-           auth()->user()->read($thread);
-       }
+        if (auth()->check()) {
+            auth()->user()->read($thread);
+        }
 
-       $trending->push($thread);
+        $trending->push($thread);
 
-       $thread->increment('visits');
+        $thread->increment('visits');
 
-       return view('threads.show', compact('thread'));
+        return view('threads.show', compact('thread'));
     }
 
     /**

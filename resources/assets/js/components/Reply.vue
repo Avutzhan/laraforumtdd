@@ -56,31 +56,25 @@
                 editing: false,
                 id: this.data.id,
                 body: this.data.body,
-                // isBest: this.data.isBest,
-                reply: this.data,
-                thread: window.thread
+                isBest: false,
+                reply: this.data
             };
         },
 
         computed: {
-            isBest() {
-                return this.thread.best_reply_id == this.id;
-            },
-
             ago() {
                 return moment(this.data.created_at).fromNow() + '...';
             }
         },
-
 
         methods: {
             update() {
                 axios.patch('/replies/' + this.data.id, {
                     body: this.body
                 })
-                .catch(error => {
-                    flash(error.response.data, 'danger');
-                });
+                    .catch(error => {
+                        flash(error.response.data, 'danger');
+                    });
 
                 this.editing = false;
 
@@ -94,10 +88,7 @@
             },
 
             markBestReply() {
-                axios.post('/replies/' + this.data.id + '/best');
-
-                this.thread.best_reply_id = this.id;
-
+                this.isBest = true;
             }
         }
     }

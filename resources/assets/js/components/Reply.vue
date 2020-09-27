@@ -56,16 +56,22 @@
                 editing: false,
                 id: this.data.id,
                 body: this.data.body,
-                isBest: false,
-                reply: this.data
+                // isBest: this.data.isBest,
+                reply: this.data,
+                thread: window.thread
             };
         },
 
         computed: {
+            isBest() {
+                return this.thread.best_reply_id == this.id;
+            },
+
             ago() {
                 return moment(this.data.created_at).fromNow() + '...';
             }
         },
+
 
         methods: {
             update() {
@@ -88,7 +94,10 @@
             },
 
             markBestReply() {
-                this.isBest = true;
+                axios.post('/replies/' + this.data.id + '/best');
+
+                this.thread.best_reply_id = this.id;
+
             }
         }
     }

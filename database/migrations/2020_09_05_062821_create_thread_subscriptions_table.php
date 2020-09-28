@@ -24,7 +24,6 @@ class CreateThreadSubscriptionsTable extends Migration
                 ->references('id')
                 ->on('threads')
                 ->onDelete('cascade');
-
         });
     }
 

@@ -43,7 +43,8 @@ $factory->define(App\Thread::class, function (Faker\Generator $faker) {
         'title' => $title,
         'body' => $faker->paragraph,
         'visits' => 0,
-        'slug' => str_slug($title)
+        'slug' => str_slug($title),
+        'locked' => false
     ];
 });
 
@@ -81,6 +82,3 @@ $factory->define(\Illuminate\Notifications\DatabaseNotification::class, function
         'data' => ['foo', 'bar']
     ];
 });
-
-//$threads = factory('App\Thread', 50)->create();
-//$threads->each( function ( $thread ) { factory('App\Reply', 10)->create(['thread_id' => $thread->id]); });

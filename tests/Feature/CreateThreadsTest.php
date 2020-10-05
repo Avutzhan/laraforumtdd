@@ -59,12 +59,6 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function a_user_can_create_new_forum_threads()
     {
-//        $this->signIn();
-
-//        $thread = make('App\Thread');
-
-//        $response = $this->post('/threads', $thread->toArray() + ['g-recaptcha-response' => 'token']);
-
         $response = $this->publishThread(['title' => 'Some Title', 'body' => 'Some body.']);
 
         $this->get($response->headers->get('Location'))

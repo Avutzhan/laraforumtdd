@@ -29,7 +29,7 @@
                 axios[this.locked ? 'delete' : 'post'](uri);
 
                 this.locked = ! this.locked;
-            }
+            },
 
             update() {
                 let uri = `/threads/${this.thread.channel.slug}/${this.thread.slug}`;

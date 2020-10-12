@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8" v-cloak>
-                    @include('threads.question)
+                    @include('threads.question')
 
                     <replies @added="repliesCount++"
                              @removed="repliesCount--"></replies>

@@ -3,24 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
-use App\Notifications\YouWereMentioned;
 use App\Reply;
 use App\Thread;
-use App\User;
-use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
 {
+    /**
+     * RepliesController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => 'index']);
     }
 
+    /**
+     * @param $channelId
+     * @param Thread $thread
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public function index($channelId, Thread $thread)
     {
         return $thread->replies()->paginate(20);
     }
 
+    /**
+     * @param $channelId
+     * @param Thread $thread
+     * @param CreatePostRequest $form
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Database\Eloquent\Model|\Symfony\Component\HttpFoundation\Response
+     */
     public function store($channelId, Thread $thread, CreatePostRequest $form)
     {
         if ($thread->locked) {
@@ -34,6 +45,10 @@ class RepliesController extends Controller
 
     }
 
+    /**
+     * @param Reply $reply
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
@@ -45,6 +60,11 @@ class RepliesController extends Controller
 
     }
 
+    /**
+     * @param Reply $reply
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy(Reply $reply)
     {
         $this->authorize('update', $reply);

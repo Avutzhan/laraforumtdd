@@ -7,20 +7,22 @@ use App\Filters\ThreadFilters;
 use App\Rules\Recaptcha;
 use App\Thread;
 use App\Trending;
-use Carbon\Carbon;
-use http\Env\Response;
-use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
+    /**
+     * ThreadsController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
-     * @param null $channelId
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Channel $channel
+     * @param ThreadFilters $filters
+     * @param Trending $trending
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
      */
     public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
     {
@@ -30,8 +32,6 @@ class ThreadsController extends Controller
             return $threads;
         }
 
-
-
         return view('threads.index', [
             'threads' => $threads,
             'trending' => $trending->get()
@@ -39,9 +39,7 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -49,8 +47,8 @@ class ThreadsController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Recaptcha $recaptcha
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function store(Recaptcha $recaptcha)
     {
@@ -60,7 +58,6 @@ class ThreadsController extends Controller
             'channel_id' => 'required|exists:channels,id',
             'g-recaptcha-response' => ['required', $recaptcha]
         ]);
-
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
@@ -80,8 +77,8 @@ class ThreadsController extends Controller
     /**
      * @param $channel
      * @param Thread $thread
+     * @param Trending $trending
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
      */
     public function show($channel, Thread $thread, Trending $trending)
     {
@@ -97,23 +94,18 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Thread  $thread
-     * @return \Illuminate\Http\Response
+     * @param $channel
+     * @param Thread $thread
+     * @return Thread
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit(Thread $thread)
-    {
-        //
-    }
-
     public function update($channel, Thread $thread)
     {
         $this->authorize('update', $thread);
 
         $thread->update(request()->validate([
-            'title' => 'required|spamfree',
-            'body' => 'required|spamfree'
+            'title' => 'required',
+            'body' => 'required'
         ]));
 
         return $thread;
@@ -122,8 +114,8 @@ class ThreadsController extends Controller
     /**
      * @param $channel
      * @param Thread $thread
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($channel, Thread $thread)
     {

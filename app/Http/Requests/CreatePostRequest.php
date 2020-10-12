@@ -18,6 +18,9 @@ class CreatePostRequest extends FormRequest
         return Gate::allows('create', new \App\Reply);
     }
 
+    /**
+     * @throws ThrottleException
+     */
     protected function failedAuthorization()
     {
         throw new ThrottleException(

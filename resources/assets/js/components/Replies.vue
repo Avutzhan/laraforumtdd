@@ -41,7 +41,7 @@
                     .then(this.refresh);
             },
 
-            url(page = 1) {
+            url(page) {
                 if (!page) {
                     let query = location.search.match(/page=(\d+)/);
 
@@ -53,7 +53,7 @@
 
             refresh({data}) {
                 this.dataSet = data;
-                this.items = data.data;
+                this.items = data.reply;
 
                 window.scrollTo(0, 0);
             }

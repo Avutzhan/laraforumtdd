@@ -66,6 +66,12 @@
             }
         },
 
+        created () {
+            window.events.$on('best-reply-selected', id => {
+                this.isBest = (id === this.id);
+            });
+        },
+
         methods: {
             update() {
                 axios.patch('/replies/' + this.id, {

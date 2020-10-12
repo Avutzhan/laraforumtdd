@@ -89665,9 +89665,7 @@ var NewReply_default = /*#__PURE__*/__webpack_require__.n(NewReply);
         fetch: function fetch(page) {
             axios.get(this.url(page)).then(this.refresh);
         },
-        url: function url() {
-            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
+        url: function url(page) {
             if (!page) {
                 var query = location.search.match(/page=(\d+)/);
 
@@ -89680,7 +89678,7 @@ var NewReply_default = /*#__PURE__*/__webpack_require__.n(NewReply);
             var data = _ref.data;
 
             this.dataSet = data;
-            this.items = data.data;
+            this.items = data.reply;
 
             window.scrollTo(0, 0);
         }

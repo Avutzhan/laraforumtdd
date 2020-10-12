@@ -1,3 +1,4 @@
+{{-- Editing the question. --}}
 <div class="panel panel-default" v-if="editing">
     <div class="panel-heading">
         <div class="level">
@@ -30,6 +31,8 @@
     </div>
 </div>
 
+
+{{-- Viewing the question. --}}
 <div class="panel panel-default" v-else>
     <div class="panel-heading">
         <div class="level">

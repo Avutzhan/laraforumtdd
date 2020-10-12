@@ -1,5 +1,5 @@
 <template>
-    <div id="'reply-'+id" class="panel" :class="isBest ? 'panel-success' : 'panel-default'">
+    <div :id="'reply-'+id" class="panel" :class="isBest ? 'panel-success' : 'panel-default'">
         <div class="panel-heading">
             <div class="level">
                 <h5 class="flex">
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import Favorite from "./Favorite";
+    import Favorite from './Favorite.vue';
     import moment from 'moment';
 
     export default {
@@ -56,7 +56,7 @@
                 editing: false,
                 id: this.reply.id,
                 body: this.reply.body,
-                isBest: this.reply.isBest
+                isBest: this.reply.isBest,
             };
         },
 
@@ -87,7 +87,9 @@
             },
 
             markBestReply() {
-                this.isBest = true;
+                axios.post('/replies/' + this.id + '/best');
+
+                window.events.$emit('best-reply-selected', this.id);
             }
         }
     }

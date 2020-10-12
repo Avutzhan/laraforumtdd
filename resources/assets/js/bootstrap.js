@@ -45,8 +45,10 @@ Vue.prototype.signedIn = window.App.signedIn;
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
+window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.App.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
 window.events = new Vue();
 
 window.flash = function (message, level = 'success') {

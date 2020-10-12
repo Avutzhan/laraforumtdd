@@ -43377,17 +43377,17 @@ Vue.use(vue_instantsearch_esm);
 var authorizations = __webpack_require__(484);
 
 Vue.prototype.authorize = function () {
-  if (!window.App.signedIn) return false;
+    if (!window.App.signedIn) return false;
 
-  for (var _len = arguments.length, params = Array(_len), _key = 0; _key < _len; _key++) {
-    params[_key] = arguments[_key];
-  }
+    for (var _len = arguments.length, params = Array(_len), _key = 0; _key < _len; _key++) {
+        params[_key] = arguments[_key];
+    }
 
-  if (typeof params[0] === 'string') {
-    return authorizations[params[0]](params[1]);
-  }
+    if (typeof params[0] === 'string') {
+        return authorizations[params[0]](params[1]);
+    }
 
-  return params[0](window.App.user);
+    return params[0](window.App.user);
 };
 
 Vue.prototype.signedIn = window.App.signedIn;
@@ -43400,14 +43400,16 @@ Vue.prototype.signedIn = window.App.signedIn;
 
 window.axios = __webpack_require__(485);
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
+window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.App.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
 window.events = new Vue();
 
 window.flash = function (message) {
-  var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+    var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
 
-  window.events.$emit('flash', { message: message, level: level });
+    window.events.$emit('flash', { message: message, level: level });
 };
 
 /***/ }),
@@ -88985,6 +88987,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -89028,7 +89033,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           return _vm.markAsRead(notification)
         }
       }
-    }, [_vm._v("Foobar")])])
+    })])
   }), 0)]) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
@@ -89486,10 +89491,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Replies__ = __webpack_require__(530);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Replies___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Replies__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton__ = __webpack_require__(545);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Replies_vue__ = __webpack_require__(530);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Replies_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Replies_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton_vue__ = __webpack_require__(545);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton_vue__);
 
 
 
@@ -89497,7 +89502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['thread'],
 
-    components: { Replies: __WEBPACK_IMPORTED_MODULE_0__components_Replies___default.a, SubscribeButton: __WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton___default.a },
+    components: { Replies: __WEBPACK_IMPORTED_MODULE_0__components_Replies_vue___default.a, SubscribeButton: __WEBPACK_IMPORTED_MODULE_1__components_SubscribeButton_vue___default.a },
 
     data: function data() {
         return {
@@ -89516,7 +89521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         toggleLock: function toggleLock() {
-            var uri = "/locked-threads/" + this.thread.slug;
+            var uri = '/locked-threads/' + this.thread.slug;
 
             axios[this.locked ? 'delete' : 'post'](uri);
 
@@ -89525,7 +89530,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         update: function update() {
             var _this = this;
 
-            var uri = "/threads/" + this.thread.channel.slug + "/" + this.thread.slug;
+            var uri = '/threads/' + this.thread.channel.slug + '/' + this.thread.slug;
 
             axios.patch(uri, this.form).then(function () {
                 _this.editing = false;
@@ -89536,7 +89541,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         resetForm: function resetForm() {
-            this.fomr = {
+            this.form = {
                 title: this.thread.title,
                 body: this.thread.body
             };
@@ -89652,9 +89657,7 @@ var NewReply_default = /*#__PURE__*/__webpack_require__.n(NewReply);
     mixins: [collection],
 
     data: function data() {
-        return {
-            dataSet: false
-        };
+        return { dataSet: false };
     },
     created: function created() {
         this.fetch();
@@ -89672,13 +89675,13 @@ var NewReply_default = /*#__PURE__*/__webpack_require__.n(NewReply);
                 page = query ? query[1] : 1;
             }
 
-            return location.pathname + "/replies?page=" + page;
+            return location.pathname + '/replies?page=' + page;
         },
         refresh: function refresh(_ref) {
             var data = _ref.data;
 
             this.dataSet = data;
-            this.items = data.reply;
+            this.items = data.data;
 
             window.scrollTo(0, 0);
         }
@@ -89731,8 +89734,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Favorite__ = __webpack_require__(534);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Favorite___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Favorite__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Favorite_vue__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Favorite_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Favorite_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
 //
@@ -89786,7 +89789,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['reply'],
 
-    components: { Favorite: __WEBPACK_IMPORTED_MODULE_0__Favorite___default.a },
+    components: { Favorite: __WEBPACK_IMPORTED_MODULE_0__Favorite_vue___default.a },
 
     data: function data() {
         return {
@@ -89822,7 +89825,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('deleted', this.id);
         },
         markBestReply: function markBestReply() {
-            this.isBest = true;
+            axios.post('/replies/' + this.id + '/best');
+
+            window.events.$emit('best-reply-selected', this.id);
         }
     }
 });
@@ -90246,7 +90251,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel",
     class: _vm.isBest ? 'panel-success' : 'panel-default',
     attrs: {
-      "id": "'reply-'+id"
+      "id": 'reply-' + _vm.id
     }
   }, [_c('div', {
     staticClass: "panel-heading"

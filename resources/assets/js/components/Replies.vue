@@ -15,9 +15,9 @@
 </template>
 
 <script>
-    import Reply from "./Reply";
-    import NewReply from "./NewReply";
-    import collection from "../mixins/collection";
+    import Reply from './Reply.vue';
+    import NewReply from './NewReply.vue';
+    import collection from '../mixins/collection';
 
     export default {
 
@@ -26,9 +26,7 @@
         mixins: [collection],
 
         data() {
-            return {
-                dataSet: false
-            }
+            return { dataSet: false };
         },
 
         created() {
@@ -42,7 +40,7 @@
             },
 
             url(page) {
-                if (!page) {
+                if (! page) {
                     let query = location.search.match(/page=(\d+)/);
 
                     page = query ? query[1] : 1;
@@ -53,7 +51,7 @@
 
             refresh({data}) {
                 this.dataSet = data;
-                this.items = data.reply;
+                this.items = data.data;
 
                 window.scrollTo(0, 0);
             }

@@ -32,7 +32,6 @@ class CreateThreadsTable extends Migration
                 ->onDelete('set null');
         });
 
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

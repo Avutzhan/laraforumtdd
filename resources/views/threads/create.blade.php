@@ -38,11 +38,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="body">Body:</label>
-                                <textarea name="body" id="body" class="form-control" rows="8" required>{{ old('body') }}</textarea>
-                            </div>
-
-                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Publish</button>
                             </div>
 

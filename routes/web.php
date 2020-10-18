@@ -53,4 +53,25 @@ Route::get('/register/confirm', 'Api\RegisterConfirmationController@index')->nam
 Route::get('api/users', 'Api\UsersController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 
+Route::get('/test', function () {
+    $name = 'Конейнер свойств';
+    $item = new \App\PropertyContainer\BlogPost();
+
+    $item->setTitle('Заголовок Статьи');
+    $item->setCategory(10);
+
+    $item->addProperty('view_count', 100);
+
+    $item->addProperty('last_update', '1');
+    $item->setProperty('last_update', '2');
+
+    $item->addProperty('read_only', '2');
+    $item->deleteProperty('read_only');
+
+    dd($item);
+
+    return view('dump', compact('name', 'item'));
+});
+
+
 

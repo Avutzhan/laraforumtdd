@@ -11,6 +11,8 @@
 |
 */
 
+use Barryvdh\Debugbar\Facade as Debugbar;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,23 +56,32 @@ Route::get('api/users', 'Api\UsersController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 
 Route::get('/test', function () {
-    $name = 'Конейнер свойств';
-    $item = new \App\PropertyContainer\BlogPost();
+    $name = 'Delegation';
 
-    $item->setTitle('Заголовок Статьи');
-    $item->setCategory(10);
+    $item = new \App\Delegation\AppMessenger();
 
-    $item->addProperty('view_count', 100);
+    $item->setSender('sender@email.ru')
+        ->setRecipient('recipient@email.ru')
+        ->setMessage('Hello email')
+        ->send();
 
-    $item->addProperty('last_update', '1');
-    $item->setProperty('last_update', '2');
+    $item->toSms()
+        ->setSender('77777777777')
+        ->setRecipient('77755555555')
+        ->setMessage('Hello sms')
+        ->send();
 
-    $item->addProperty('read_only', '2');
-    $item->deleteProperty('read_only');
+    Debugbar::info($item);
 
-    dd($item);
+    return view('welcome');
 
-    return view('dump', compact('name', 'item'));
+    //messages from debugbar
+    //    sent by App\Delegation\EmailMessenger::send
+    //info
+    //    sent by App\Delegation\SmsMessenger::send
+    //info
+    //    App\Delegation\AppMessenger {#351 -messenger: App\Delegation\SmsMessenger {#347 #sender: "7777...
+    //info
 });
 
 

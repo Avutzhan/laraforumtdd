@@ -56,32 +56,12 @@ Route::get('api/users', 'Api\UsersController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 
 Route::get('/test', function () {
-    $name = 'Delegation';
+    $name = "Event channel";
 
-    $item = new \App\Delegation\AppMessenger();
-
-    $item->setSender('sender@email.ru')
-        ->setRecipient('recipient@email.ru')
-        ->setMessage('Hello email')
-        ->send();
-
-    $item->toSms()
-        ->setSender('77777777777')
-        ->setRecipient('77755555555')
-        ->setMessage('Hello sms')
-        ->send();
-
-    Debugbar::info($item);
+    $item = new \App\EventChannel\EventChannelJob();
+    $item->run();
 
     return view('welcome');
-
-    //messages from debugbar
-    //    sent by App\Delegation\EmailMessenger::send
-    //info
-    //    sent by App\Delegation\SmsMessenger::send
-    //info
-    //    App\Delegation\AppMessenger {#351 -messenger: App\Delegation\SmsMessenger {#347 #sender: "7777...
-    //info
 });
 
 

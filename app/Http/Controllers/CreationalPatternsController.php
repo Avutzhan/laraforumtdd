@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\AbstractFactory\GuiKitFactory;
+use App\FactoryMethod\Classes\Forms\BootstrapDialogForm;
+use App\FactoryMethod\Classes\Forms\SemanticUiDialogForm;
 use Barryvdh\Debugbar\Facade as Debugbar;
-use Illuminate\Http\Request;
 
 class CreationalPatternsController extends Controller
 {
-    private $guiKit;
-
-    public function __construct()
+    public function FactoryMethod()
     {
+        $name = 'Фабричный метод';
         //switch classes here
-        $this->guiKit = (new GuiKitFactory())->getFactory('bootstrap');
-//        $this->guiKit = (new GuiKitFactory())->getFactory('semanticui');
-    }
-
-    public function AbstractFactory()
-    {
-        $name = 'Abstract Factory';
-
-        $result[] = $this->guiKit->buildButton()->draw();
-        $result[] = $this->guiKit->buildCheckBox()->draw();
+        $dialogForm = new BootstrapDialogForm();
+//        $dialogForm = new SemanticUiDialogForm();
+        $result = $dialogForm->render();
 
         Debugbar::info($result);
 

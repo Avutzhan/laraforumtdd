@@ -11,7 +11,7 @@
 |
 */
 
-use Barryvdh\Debugbar\Facade as Debugbar;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,14 +55,7 @@ Route::get('/register/confirm', 'Api\RegisterConfirmationController@index')->nam
 Route::get('api/users', 'Api\UsersController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 
-Route::get('/test', function () {
-    $name = "Event channel";
-
-    $item = new \App\EventChannel\EventChannelJob();
-    $item->run();
-
-    return view('welcome');
-});
+Route::get('/test', 'CreationalPatternsController@AbstractFactory');
 
 
 

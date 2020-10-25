@@ -1,8 +1,9 @@
 <?php
 
 
-namespace App\EventChannel;
+namespace App\EventChannel\Classes;
 
+use App\EventChannel\Interfaces\SubscriberInterface;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class Subscriber implements SubscriberInterface

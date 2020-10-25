@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Delegation;
+namespace App\StaticFactory\Classes;
 
 use Barryvdh\Debugbar\Facade as Debugbar;
 

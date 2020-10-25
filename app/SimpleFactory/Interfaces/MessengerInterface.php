@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Delegation;
+namespace App\SimpleFactory\Interfaces;
 
 
 interface MessengerInterface

@@ -1,8 +1,11 @@
 <?php
 
 
-namespace App\EventChannel;
+namespace App\EventChannel\Classes;
 
+
+use App\EventChannel\Interfaces\EventChannelInterface;
+use App\EventChannel\Interfaces\PublisherInterface;
 
 class Publisher implements PublisherInterface
 {

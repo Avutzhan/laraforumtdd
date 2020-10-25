@@ -4,6 +4,8 @@
 namespace App\PropertyContainer;
 
 
+use App\PropertyContainer\Classes\PropertyContainer;
+
 class BlogPost extends PropertyContainer
 {
     private $title;

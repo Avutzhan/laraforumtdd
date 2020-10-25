@@ -1,8 +1,12 @@
 <?php
 
 
-namespace App\EventChannel;
+namespace App\EventChannel\Jobs;
 
+
+use App\EventChannel\Classes\EventChannel;
+use App\EventChannel\Classes\Publisher;
+use App\EventChannel\Classes\Subscriber;
 
 class EventChannelJob
 {

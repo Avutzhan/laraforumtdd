@@ -1,8 +1,10 @@
 <?php
 
 
-namespace App\PropertyContainer;
+namespace App\PropertyContainer\Classes;
 
+
+use App\PropertyContainer\Interfaces\PropertyContainerInterface;
 
 class PropertyContainer implements PropertyContainerInterface
 {

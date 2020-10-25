@@ -1,8 +1,10 @@
 <?php
 
 
-namespace App\Delegation;
+namespace App\StaticFactory\Classes;
 
+
+use App\StaticFactory\Interfaces\MessengerInterface;
 
 class AppMessenger implements MessengerInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\StaticFactory;
+namespace App\StaticFactory\Classes;
 
 use Barryvdh\Debugbar\Facade as Debugbar;
 
-class EmailMessenger extends AbstractMessenger
+class SmsMessenger extends AbstractMessenger
 {
     public function send()
     {

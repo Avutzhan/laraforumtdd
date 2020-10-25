@@ -1,6 +1,8 @@
 <?php
 
-namespace App\StaticFactory;
+namespace App\SimpleFactory\Classes;
+
+use App\SimpleFactory\Interfaces\MessengerInterface;
 
 abstract class AbstractMessenger implements MessengerInterface
 {

@@ -1,8 +1,9 @@
 <?php
 
 
-namespace App\Delegation;
+namespace App\Delegation\Messengers;
 
+use App\Delegation\Classes\AbstractMessenger;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class SmsMessenger extends AbstractMessenger

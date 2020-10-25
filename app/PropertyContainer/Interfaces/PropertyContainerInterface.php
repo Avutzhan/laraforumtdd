@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\PropertyContainer;
+namespace App\PropertyContainer\Interfaces;
 
 
 interface PropertyContainerInterface

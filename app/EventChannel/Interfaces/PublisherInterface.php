@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\EventChannel;
+namespace App\EventChannel\Interfaces;
 
 
 interface PublisherInterface

@@ -4,6 +4,9 @@
 namespace App\StaticFactory;
 
 
+use App\StaticFactory\Classes\AppMessenger;
+use App\StaticFactory\Interfaces\MessengerStaticFactoryInterface;
+
 class StaticFactory implements MessengerStaticFactoryInterface
 {
     public static function build($type = 'email') //: MessengerInterface

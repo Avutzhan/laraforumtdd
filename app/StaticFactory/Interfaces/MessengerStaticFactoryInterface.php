@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\StaticFactory;
+namespace App\StaticFactory\Interfaces;
 
 
 interface MessengerStaticFactoryInterface

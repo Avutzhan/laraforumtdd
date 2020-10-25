@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\FactoryMethod\Classes\Forms\BootstrapDialogForm;
-use App\FactoryMethod\Classes\Forms\SemanticUiDialogForm;
+use App\StaticFactory\StaticFactory;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class CreationalPatternsController extends Controller
 {
-    public function FactoryMethod()
+    public function StaticFactory()
     {
-        $name = 'Фабричный метод';
-        //switch classes here
-        $dialogForm = new BootstrapDialogForm();
-//        $dialogForm = new SemanticUiDialogForm();
-        $result = $dialogForm->render();
+        $name = "Static Factory";
 
-        Debugbar::info($result);
+        $appMailMessenger = StaticFactory::build('email');
+        $appPhoneMessenger = StaticFactory::build('sms');
+
+        Debugbar::info($appMailMessenger, $appPhoneMessenger);
 
         return view('welcome');
     }

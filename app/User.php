@@ -82,4 +82,19 @@ class User extends Authenticatable
         $pathmath = $avatar ?: 'avatars/default.jpg';
         return asset('storage/' . $pathmath);
     }
+
+    public function departmentName()
+    {
+        $departments = [
+            'florist',
+            'logist',
+            'courierHiking',
+            'courierAuto',
+            'courierAutoNight',
+        ];
+
+        $key = array_rand($departments);
+
+        return $departments[$key];
+    }
 }

@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Builder\BlogPostBuilder;
+use App\Builder\BlogPostManager;
 use App\Multiton\SimpleMultiton;
 use App\Multiton\SimpleMultitonNext;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class CreationalPatternsController extends Controller
 {
-    public function Multiton()
+    public function Builder()
     {
-        $name = "Multiton";
+        $name = "Builder";
 
-        $multiton[] = SimpleMultiton::getInstance('mysql')->setTest('mysql-test');
-        $multiton[] = SimpleMultiton::getInstance('mongo');
+        $builder = new BlogPostBuilder();
 
-        $multiton[] = SimpleMultiton::getInstance('mysql');
-        $multiton[] = SimpleMultiton::getInstance('mongo')->setTest('mongo-test');
+        $posts[] = $builder->setTitle('from Builder')
+                        ->getBlogPost();
 
-        $simpleMultitonNext = SimpleMultitonNext::getInstance('mysql');
-        $simpleMultitonNext->test2 = 'init';
+        $manager = new BlogPostManager();
+        $manager->setBuilder($builder);
 
-        $simpleMultitonNext = SimpleMultitonNext::getInstance('mysql');
-        $simpleMultitonNext->test2 = 'init2';
-        $multiton[] = $simpleMultitonNext;
+        $posts[] = $manager->createCleanPost();
+        $posts[] = $manager->createNewPostIt();
+        $posts[] = $manager->createNewPostCats();
 
-        Debugbar::info($multiton);
+        Debugbar::info($posts);
 
         return view('welcome');
     }

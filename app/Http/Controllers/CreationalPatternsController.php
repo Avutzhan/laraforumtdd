@@ -2,33 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Singleton\AdvancedSingleton;
-use App\Singleton\Contracts\AnotherConnection;
-use App\Singleton\LaravelSingleton;
-use App\Singleton\SimpleSingleton;
-use App\Strategy\SalaryManager;
-use App\User;
+use App\Multiton\SimpleMultiton;
+use App\Multiton\SimpleMultitonNext;
 use Barryvdh\Debugbar\Facade as Debugbar;
-use Carbon\Carbon;
 
 class CreationalPatternsController extends Controller
 {
-    public function Strategy()
+    public function Multiton()
     {
-        $name = "Strategy";
+        $name = "Multiton";
 
-        $period = [
-            Carbon::now()->subMonth()->startOfMonth(),
-            Carbon::now()->subMonth()->endOfMonth()
-        ];
+        $multiton[] = SimpleMultiton::getInstance('mysql')->setTest('mysql-test');
+        $multiton[] = SimpleMultiton::getInstance('mongo');
 
-        $users = User::all();
+        $multiton[] = SimpleMultiton::getInstance('mysql');
+        $multiton[] = SimpleMultiton::getInstance('mongo')->setTest('mongo-test');
 
-        $result = (new SalaryManager($period, $users))->handle();
+        $simpleMultitonNext = SimpleMultitonNext::getInstance('mysql');
+        $simpleMultitonNext->test2 = 'init';
 
-        //<Laravel-way способ создания Одиночки
+        $simpleMultitonNext = SimpleMultitonNext::getInstance('mysql');
+        $simpleMultitonNext->test2 = 'init2';
+        $multiton[] = $simpleMultitonNext;
 
-        Debugbar::info($result);
+        Debugbar::info($multiton);
 
         return view('welcome');
     }

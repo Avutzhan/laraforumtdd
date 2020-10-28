@@ -4,29 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Builder\BlogPostBuilder;
 use App\Builder\BlogPostManager;
+use App\LazyInitialization\LazyInitialization;
 use App\Multiton\SimpleMultiton;
 use App\Multiton\SimpleMultitonNext;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class CreationalPatternsController extends Controller
 {
-    public function Builder()
+    public function LazyInit()
     {
-        $name = "Builder";
+        $name = "Lazy Initialization отложенная ленивая инициализация";
 
-        $builder = new BlogPostBuilder();
+        $lazyLoad = new LazyInitialization();
 
-        $posts[] = $builder->setTitle('from Builder')
-                        ->getBlogPost();
+        $user[] = $lazyLoad->getUser()->name;
+        $user[] = $lazyLoad->getUser()->email;
+        $user[] = $lazyLoad->getUser()->created_at;
 
-        $manager = new BlogPostManager();
-        $manager->setBuilder($builder);
-
-        $posts[] = $manager->createCleanPost();
-        $posts[] = $manager->createNewPostIt();
-        $posts[] = $manager->createNewPostCats();
-
-        Debugbar::info($posts);
+        Debugbar::info($user);
 
         return view('welcome');
     }

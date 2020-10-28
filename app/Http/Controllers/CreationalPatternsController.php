@@ -7,21 +7,19 @@ use App\Builder\BlogPostManager;
 use App\LazyInitialization\LazyInitialization;
 use App\Multiton\SimpleMultiton;
 use App\Multiton\SimpleMultitonNext;
+use App\Prototype\PrototypeDemo;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class CreationalPatternsController extends Controller
 {
-    public function LazyInit()
+    public function Prototype()
     {
-        $name = "Lazy Initialization отложенная ленивая инициализация";
+        $name = "Прототип";
 
-        $lazyLoad = new LazyInitialization();
+        $prototypeDemo = new PrototypeDemo();
+        $result = $prototypeDemo->run();
 
-        $user[] = $lazyLoad->getUser()->name;
-        $user[] = $lazyLoad->getUser()->email;
-        $user[] = $lazyLoad->getUser()->created_at;
-
-        Debugbar::info($user);
+        Debugbar::info($result);
 
         return view('welcome');
     }

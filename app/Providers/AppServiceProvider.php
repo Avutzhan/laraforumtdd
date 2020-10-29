@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Adapter\Classes\MediaLibraryAdapter;
+use App\Adapter\Classes\MediaLibrarySelfWritten;
+use App\Adapter\Interfaces\MediaLibraryInterface;
 use App\Channel;
 use App\Singleton\Contracts\AnotherConnection;
 use App\Singleton\LaravelSingleton;
@@ -13,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
 //    public $singletons = [
 //        AnotherConnection::class => LaravelSingleton::class,
 ////        LaravelSingleton::class => LaravelSingleton::class,
+//    ];
+
+//    public $bindings = [
+//        MediaLibraryInterface::class => MediaLibraryAdapter::class,
 //    ];
     /**
      * Bootstrap any application services.
@@ -39,6 +46,11 @@ class AppServiceProvider extends ServiceProvider
         //this is for 5.5 version singleton
         $this->app->singleton(LaravelSingleton::class, function ($app) {
             return new LaravelSingleton();
+        });
+
+        $this->app->bind(MediaLibraryInterface::class, function ($app) {
+            return new MediaLibraryAdapter();
+//            return new MediaLibrarySelfWritten();
         });
 
         if ($this->app->isLocal()) {

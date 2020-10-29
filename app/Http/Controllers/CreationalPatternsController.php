@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Builder\BlogPostBuilder;
-use App\Builder\BlogPostManager;
-use App\LazyInitialization\LazyInitialization;
-use App\Multiton\SimpleMultiton;
-use App\Multiton\SimpleMultitonNext;
-use App\Prototype\PrototypeDemo;
+use App\ObjectPool\ObjectPoolDemo;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class CreationalPatternsController extends Controller
 {
-    public function Prototype()
+    public function ObjectPool()
     {
-        $name = "Прототип";
+        $name = "ObjectPool";
 
-        $prototypeDemo = new PrototypeDemo();
-        $result = $prototypeDemo->run();
-
-        Debugbar::info($result);
+        $objectPoolDemo = new ObjectPoolDemo();
+        $objectPoolDemo->run();
 
         return view('welcome');
     }

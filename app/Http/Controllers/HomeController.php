@@ -29,7 +29,7 @@ class HomeController extends Controller
          * Redis Stuff
          */
         //start connection
-        $redis = Redis::connection();
+        //$redis = Redis::connection();
 
         //Getters Setters
         //get set done
@@ -133,10 +133,10 @@ class HomeController extends Controller
         /**
          * Memcached Stuff
          */
-        $mc = new \Memcached();
+        //$mc = new \Memcached();
 
         //connect
-        $mc->addServer("localhost", 11211);
+        //$mc->addServer("localhost", 11211);
 
         //get set
         //$mc->set("foo", "Hello!");
@@ -148,7 +148,7 @@ class HomeController extends Controller
 
         //append
         //$mc->flush(1);
-        $mc->setOption(\Memcached::OPT_COMPRESSION, false);
+        //$mc->setOption(\Memcached::OPT_COMPRESSION, false);
         //$mc->set('foo', 'bar');
         //$mc->append('foo', 'berber');
         //$var = $mc->get('foo');
@@ -178,9 +178,11 @@ class HomeController extends Controller
         //$mc->set('array', array(11, 12));
 
         //$mc->getDelayed(array('int', 'array', 'string'), true);
-        $var1 = $mc->fetchAll();
+        //$var1 = $mc->fetchAll();
         
-        dd($var1);
+        //dd($var1);
+
+        notify()->success('Laravel Notify is awesome!');
 
         return view('home');
     }

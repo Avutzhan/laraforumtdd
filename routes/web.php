@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\FormSubmit;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,5 +58,10 @@ Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middle
 
 Route::get('/test', 'CreationalPatternsController@Bridge');
 
+Route::view('/pusher', 'pusher');
+Route::view('/sender', 'sender');
 
-
+Route::post('/sender', function () {
+    $text = request()->text;
+    event(new FormSubmit($text));
+});
